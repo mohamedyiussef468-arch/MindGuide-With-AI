@@ -84,3 +84,21 @@ npm run start
 
 ## 📄 الترخيص (License)
 هذا المشروع مرخص بموجب رخصة MIT.
+
+
+## بناء تطبيق Android (APK) عبر Capacitor
+
+المشروع يحتوي الآن على غلاف Android باستخدام Capacitor. للتجربة محليًا:
+
+```bash
+npm install
+npm run cap:sync
+cd android
+./gradlew assembleDebug
+```
+
+سيظهر الملف في `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+يستخدم تطبيق Android المتغير `VITE_API_BASE_URL` لإرسال طلبات `/api/*` إلى الخادم المنشور. يمكن ضبطه في بيئة البناء، مع إبقاء مفاتيح Gemini السرية على الخادم وعدم وضعها داخل APK.
+
+يوجد Workflow باسم **Build Android APK** في `.github/workflows/android-apk.yml`. يتم تشغيله تلقائيًا عند الدفع إلى فرع `main` أو يدويًا من تبويب **Actions**، ثم يرفع ملف `app-debug.apk` كـArtifact. يمكن إضافة Secret باسم `VITE_API_BASE_URL` إذا كان Backend منشورًا على عنوان مختلف.

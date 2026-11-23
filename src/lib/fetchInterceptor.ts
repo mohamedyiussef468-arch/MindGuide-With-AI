@@ -44,6 +44,14 @@ function getLanguageInstruction(langCode?: string): string {
 // This allows the React SPA to work fully offline and serverless if Express is not running.
 
 const originalFetch = window.fetch;
+const configuredApiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/$/, '');
+
+function resolveApiRequest(input: RequestInfo | URL, url: string): RequestInfo | URL {
+  if (!configuredApiBaseUrl || !url.startsWith('/api/')) {
+    return input;
+  }
+  return `${configuredApiBaseUrl}${url}`;
+}
 
 // Helper to make a direct REST call to Google's official Gemini API
 async function generateWithGeminiREST(prompt: string, systemInstruction?: string, isJson?: boolean, userApiKey?: string) {
@@ -134,7 +142,7 @@ const customFetch = async function (input: RequestInfo | URL, init?: RequestInit
 
   try {
     // 1. Always attempt the actual server first
-    const response = await originalFetch(input, init);
+    const response = await originalFetch(resolveApiRequest(input, url), init);
     const contentType = response.headers.get('content-type');
     
     // If we are on Vercel, a missing route might return a 404 with HTML contents,

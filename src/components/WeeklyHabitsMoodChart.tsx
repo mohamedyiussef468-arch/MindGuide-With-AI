@@ -205,7 +205,7 @@ export const WeeklyHabitsMoodChart: React.FC<WeeklyHabitsMoodChartProps> = ({ ha
               }}
             />
             
-            <Legend style={{ fontSize: '11px', fontWeight: 'bold' }} />
+            <Legend wrapperStyle={{ fontSize: '11px', fontWeight: 'bold' }} />
             
             {/* Bar for Habit Completion Rate */}
             <Bar 

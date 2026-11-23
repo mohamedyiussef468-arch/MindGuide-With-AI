@@ -7536,7 +7536,7 @@ export default function App() {
                           <XAxis dataKey="name" stroke="#5A5A40" style={{ fontSize: '10px' }} />
                           <YAxis stroke="#5A5A40" style={{ fontSize: '10px' }} />
                           <ChartTooltip />
-                          <Legend style={{ fontSize: '11px' }} />
+                          <Legend wrapperStyle={{ fontSize: '11px' }} />
                           <Line type="monotone" dataKey="النوم" stroke="#8B9D83" strokeWidth={2.5} name="ساعات النوم" />
                           <Line type="monotone" dataKey="الرياضة" stroke="#D4A373" strokeWidth={2.5} name="دقائق الرياضة" />
                         </LineChart>
